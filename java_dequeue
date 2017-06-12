@@ -1,0 +1,45 @@
+    import java.util.*;
+    public class test {
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            Deque<Integer> deque = new ArrayDeque<Integer>();
+            HashMap<Integer,String> hm = new HashMap<Integer,String>();
+            int n = in.nextInt();
+            int m = in.nextInt();
+            int ans=0;
+
+            for (int i = 0; i < m; i++)
+            {
+                int num = in.nextInt();
+                deque.addFirst(num);
+                if(!hm.containsKey(num))
+                    {
+                hm.put(num,"true");
+                }
+            }
+            ans=hm.size();
+            for (int i = m-1; i < n; i++)
+            {
+                int num = in.nextInt();
+                int last=deque.pop();
+                if(hm.containsKey(last))
+                    {
+                hm.remove(last);
+                }
+                deque.addFirst(num);
+                if(!hm.containsKey(num))
+                    {
+                hm.put(num,"true");
+                }
+                
+                int tem = hm.size();
+                if(ans<tem)
+                    {
+                    ans=tem;
+                }
+            }
+            
+            System.out.println(ans);
+            
+        }
+    }
