@@ -1,0 +1,79 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static String solve(int[] a){
+        if(a.length == 1)
+            return "YES";
+        boolean flg=true;
+        int end = a.length-1,start=0,ss=a[0],es=a[a.length-1];
+        String ans="";
+       while(flg==true)
+       {
+          // System.out.println(ss+" , "+es+"#"+start+"."+end+"dam");
+           if(end<=start)
+           {
+               ans="NO";
+               flg=false;
+               break;
+           }
+           else if(ss>es)
+           {
+               end = end-1;
+               es+=a[end];
+               if(es == ss && start+2 == end)
+               {
+                  // System.out.println(ss+" , "+start+"."+end+"dal");
+                ans="YES";
+               flg=false;
+               break;
+               }
+           }
+           else if(ss<es)
+           {
+               
+               start = start+1;
+               ss+=a[start];
+               if(es == ss && start+2 == end)
+               {
+                  // System.out.println(ss+" , "+es+"#"+start+"."+end+"dam");
+                ans="YES";
+               flg=false;
+               break;
+               }
+              // System.out.println(ss+" , "+es+"#"+start+"."+end+"dam");
+           }
+           else
+           {
+               if(start+2 == end)
+               {
+                  // System.out.println(ss+" , "+start+"."+end+"dan");
+                ans="YES";
+               flg=false;
+               break;
+               }
+               start=start+1;
+              ss+=a[start];
+           }
+       }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int T = in.nextInt();
+        for(int a0 = 0; a0 < T; a0++){
+            int n = in.nextInt();
+            int[] a = new int[n];
+            for(int a_i=0; a_i < n; a_i++){
+                a[a_i] = in.nextInt();
+            }
+            String result = solve(a);
+            System.out.println(result);
+        }
+    }
+}
